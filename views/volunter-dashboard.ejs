@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/style/index.css">
+    <link rel="stylesheet" href="/style/admin.css"> 
+    <title>Dashboard de Voluntários</title>
+    <script type="module" src="/script/auth-guard.js"></script>
+ 
+</head>
+<body>
+
+    <%- include('./templates//nav.ejs')%>
+
+    <header>
+        <h1>Dashboard de Voluntários</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar por nome do voluntário...">
+        </div>
+    </header>
+    <main>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Telefone</th>
+                        <th>Mensagem</th>
+                        <th>Data da Inscrição</th>
+                        <th>Status</th> <th>Apagar</th>
+                    </tr>
+                </thead>
+                <tbody id="volunteers-table-body">
+                    </tbody>
+            </table>
+            <p id="no-results-message" style="display:none; text-align: center;">Nenhum resultado encontrado.</p>
+        </div>
+    </main>
+
+ 
+   <script type="module" src="/script/firebase-client.js"></script>
+    <script type="module" src="/script/admin-dashboard.js"></script>
+</body>
+</html>
+</body>
+</html>

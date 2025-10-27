@@ -1,0 +1,111 @@
+/* ======= Painel Administrativo - Novo Layout ======= */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fc;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cabeçalho */
+header {
+  background: linear-gradient(90deg, #4e73df, #224abe);
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+/* Container principal */
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  padding: 30px;
+}
+
+/* Campo de busca */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+#searchInput {
+  width: 60%;
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+}
+
+#searchInput:focus {
+  border-color: #4e73df;
+  box-shadow: 0 0 5px rgba(78,115,223,0.5);
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+thead {
+  background-color: #4e73df;
+  color: white;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e3e6f0;
+}
+
+tr:hover {
+  background-color: #f1f3f9;
+}
+
+/* Botões */
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #36b9cc;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #2c9faf;
+}
+
+.delete-btn {
+  background-color: #e74a3b;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Rodapé */
+footer {
+  text-align: center;
+  padding: 15px;
+  color: #888;
+  font-size: 0.9em;
+}

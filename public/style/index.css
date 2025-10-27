@@ -1,0 +1,287 @@
+/* --- ESTILOS GLOBAIS E RESET --- */
+:root {
+    --cor-primaria: #007bff; /* Azul primário para botões e links */
+    --cor-perigo: #dc3545;   /* Vermelho para botões de exclusão */
+    --cor-fundo: #f4f7f6;    /* Cinza bem claro para o fundo da página */
+    --cor-container: #ffffff; /* Branco para os containers de conteúdo */
+    --cor-texto: #333;      /* Cor principal do texto */
+    --cor-borda: #dee2e6;    /* Cinza claro para bordas */
+    --sombra: 0 2px 5px rgba(0,0,0,0.1); /* Sombra suave para os containers */
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto);
+    line-height: 1.6;
+}
+
+/* --- ESTILO DA NAVEGAÇÃO (NAV) --- */
+/* Estilo base, ajuste conforme o seu nav.ejs */
+nav {
+    background-color: #343a40;
+    padding: 1rem 2rem;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--sombra);
+}
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+nav a:hover {
+    background-color: #495057;
+}
+
+
+/* --- CONTAINERS PRINCIPAIS --- */
+main, .form-container, .table-container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--cor-container);
+    border-radius: 8px;
+    box-shadow: var(--sombra);
+}
+
+/* --- CABEÇALHOS E BUSCA --- */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap; /* Para telas menores */
+}
+
+h1, h2 {
+    color: var(--cor-texto);
+}
+
+#searchInput {
+    padding: 0.75rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    width: 300px;
+}
+
+/* --- ESTILOS DE FORMULÁRIO --- */
+.form-container h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+fieldset {
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 0.5rem;
+    color: var(--cor-primaria);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="tel"],
+input[type="email"],
+textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* --- BOTÕES --- */
+.submit-button, .delete-btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.submit-button {
+    background-color: var(--cor-primaria);
+    width: 100%;
+}
+.submit-button:hover {
+    background-color: #0056b3;
+}
+
+.delete-btn {
+    background-color: var(--cor-perigo);
+}
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+
+/* --- ESTILOS DE TABELA --- */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th, td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+thead th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.status-select {
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid var(--cor-borda);
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #searchInput {
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    /* Adiciona rolagem horizontal à tabela em telas pequenas */
+    .table-container {
+        overflow-x: auto;
+    }
+}
+
+/*nav ejs*/
+
+/* --- ESTILO DA NAVEGAÇÃO (NAV) --- */
+.header {
+    background-color: #343a40; /* Cinza escuro */
+    padding: 0 2rem; /* Espaçamento lateral */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+/* Container para alinhar o conteúdo */
+.header .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.logo {
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+nav ul {
+    list-style: none; /* Remove as bolinhas da lista */
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Espaçamento entre os itens do menu */
+}
+
+nav ul li a {
+    color: #f8f9fa; /* Branco suave */
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+    font-weight: 500;
+}
+
+nav ul li a:hover {
+    background-color: #495057; /* Cinza um pouco mais claro no hover */
+}
+
+/* Estilo específico para o botão "Sair" */
+#logout-btn {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--cor-perigo); /* Usa a variável vermelha que já definimos */
+    color: white;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#logout-btn:hover {
+    background-color: #c82333; /* Vermelho mais escuro no hover */
+}
+
+
+/* --- Adicionando responsividade para a navegação --- */
+@media (max-width: 992px) {
+    .header .container {
+        flex-direction: column;
+        height: auto;
+        padding: 1rem 0;
+    }
+
+    nav ul {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 1rem;
+    }
+
+    nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul li a {
+        display: block; /* Faz o link ocupar toda a largura do <li> */
+    }
+}
