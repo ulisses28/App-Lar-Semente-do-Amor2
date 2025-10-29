@@ -1,59 +1,27 @@
-// src/routes/volunteerRoute.js
-
 const express = require('express');
 const router = express.Router();
-const { db } = require('../config/firebaseConfig');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 
-//---------------------------------------------
-// 🔹 Página de registro do voluntário
-//---------------------------------------------
-router.get('/register', (req, res) => {
-  res.render('volunteer-register');
+const uploadDir = path.join(__dirname, '../../uploads');
+if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
+
+const storage = multer.diskStorage({
+  destination: (_, __, cb) => cb(null, uploadDir),
+  filename: (_, file, cb) => cb(null, Date.now() + '-' + file.originalname)
 });
+const upload = multer({ storage });
 
-//---------------------------------------------
-// 🔹 Salvar voluntário no Firebase
-//---------------------------------------------
-router.post('/register', async (req, res) => {
-  try {
-    const { name, email, phone, address, skills } = req.body;
-
-    if (!name || !email) {
-      return res.status(400).send('Nome e e-mail são obrigatórios.');
-    }
-
-    await db.collection('volunteers').add({
-      name,
-      email,
-      phone,
-      address,
-      skills,
-      createdAt: new Date(),
-    });
-
-    res.redirect('/volunteer-dashboard');
-  } catch (error) {
-    console.error('Erro ao registrar voluntário:', error);
-    res.status(500).send('Erro ao registrar voluntário.');
-  }
-});
-
-//---------------------------------------------
-// 🔹 Painel do voluntário (exemplo)
-//---------------------------------------------
-router.get('/volunteer-dashboard', async (req, res) => {
-  try {
-    const volunteersSnapshot = await db.collection('volunteers').get();
-    const volunteers = volunteersSnapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
-
-    res.render('volunteer-dashboard', { volunteers });
-  } catch (error) {
-    console.error('Erro ao carregar dashboard:', error);
-    res.status(500).send('Erro ao carregar painel de voluntários.');
-  }
+router.get('/register', (_, res) => res.render('volunteer-register'));
+router.get('/dashboard', (_, res) => res.render('volunteer-dashboard'));
+router.post('/register', upload.fields([
+  { name: 'foto', maxCount: 1 },
+  { name: 'certidao', maxCount: 1 },
+  { name: 'documentoEscolar', maxCount: 1 }
+]), (req, res) => {
+  console.log(req.body, req.files);
+  res.redirect('/volunteer/dashboard');
 });
 
 module.exports = router;
