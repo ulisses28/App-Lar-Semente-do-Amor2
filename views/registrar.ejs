@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Registrar Acólito</title>
+  <link rel="stylesheet" href="/css/painel.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Registrar Novo Acólito</h1>
+
+    <form action="/acolito/registrar" method="POST" class="form">
+      <label>Nome do Acólito:</label>
+      <input type="text" name="nome" required>
+
+      <label>Idade:</label>
+      <input type="number" name="idade" required>
+
+      <label>Função:</label>
+      <input type="text" name="funcao" required>
+
+      <button type="submit">Salvar</button>
+      <a href="/acolito" class="btn btn-secondary">Voltar</a>
+    </form>
+  </div>
+</body>
+</html>

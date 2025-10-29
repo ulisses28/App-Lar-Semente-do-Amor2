@@ -53,12 +53,13 @@ app.post('/login', (req, res) => {
   const { email, password } = req.body;
 
   // ⚠️ Aqui você pode integrar o Firebase Admin SDK ou autenticação real
-  if (email === 'admin@alsa.com' && password === '123456') {
+  if (email === 'admin@alsa.com' && password === '123456')  {
     req.session.user = email;
     return res.redirect('/home');
   }
 
-  res.status(401).send('Credenciais inválidas');
+  res.render('login', { error: 'Credenciais inválidas' });
+
 });
 
 // 🔹 Página inicial protegida
