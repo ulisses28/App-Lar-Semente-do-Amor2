@@ -1,19 +1,76 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
-const fs = require('fs');
+
 const volunteerRoute = require('./routes/volunteerRoute');
+const acolitoRoute = require('./routes/acolitoRoute');
 
 const app = express();
+const PORT = process.env.PORT || 8888;
 
-app.set('views', path.join(__dirname, '../views'));
-app.set('view engine', 'ejs');
+// Configurações básicas
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
-const uploadsDir = path.join(__dirname, '../uploads');
-if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true });
+// Sessão para guardar estado do login
+app.use(session({
+  secret: 'chave-secreta-segura',
+  resave: false,
+  saveUninitialized: true
+}));
 
-app.get('/', (req, res) => res.render('home'));
-app.use('/volunteer', volunteerRoute);
+// Middleware para proteger páginas (verifica login)
+function checkAuth(req, res, next) {
+  if (!req.session.user) {
+    return res.redirect('/login');
+  }
+  next();
+}
 
-app.listen(8888, () => console.log('🚀 Servidor: http://localhost:8888'));
+// Define o EJS como view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, '../views'));
+
+// 🔹 Rota inicial → redireciona para login
+app.get('/', (req, res) => {
+  res.redirect('/login');
+});
+
+// 🔹 Página de login (carrega seu login.ejs)
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+// 🔹 Logout (encerra sessão e volta ao login)
+app.get('/logout', (req, res) => {
+  req.session.destroy();
+  res.redirect('/login');
+});
+
+// 🔹 Simulação simples de login — POST via formulário
+app.post('/login', (req, res) => {
+  const { email, password } = req.body;
+
+  // ⚠️ Aqui você pode integrar o Firebase Admin SDK ou autenticação real
+  if (email === 'admin@alsa.com' && password === '123456') {
+    req.session.user = email;
+    return res.redirect('/home');
+  }
+
+  res.status(401).send('Credenciais inválidas');
+});
+
+// 🔹 Página inicial protegida
+app.get('/home', checkAuth, (req, res) => {
+  res.render('home', { user: req.session.user });
+});
+
+// 🔹 Rotas protegidas (voluntários, acólitos, etc.)
+app.use('/volunteer', checkAuth, volunteerRoute);
+app.use('/acolito', checkAuth, acolitoRoute);
+
+// Inicializa o servidor
+app.listen(PORT, () => {
+  console.log(`Servidor rodando em http://localhost:${PORT}`);
+});
